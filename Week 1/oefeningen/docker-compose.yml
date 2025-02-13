@@ -1,0 +1,7 @@
+services:
+  hello-world:
+    build: oefening1
+  request:
+    build: oefening2
+  file_reader:
+    build: oefening3

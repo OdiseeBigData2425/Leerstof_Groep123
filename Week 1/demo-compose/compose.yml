@@ -1,0 +1,23 @@
+services:
+  # eerstre container noemt web
+  web:
+    # bouw de container via de dockerfile in de app-folder
+    build: app
+    # 5000 op de host is 5000 in de container
+    # om een host-poort te koppelen aan een container poort (kan gebruikt worden om duplicaten te vermijden)
+    ports: 
+      - 5000:5000
+    # deze container mag maar starten als de volgende gestart is
+    depends_on:
+      - db
+    # stel de db link in in de database url
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/mydatabase
+
+  db:
+    # download de image hiervan ongewijzigd van de public registry
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mydatabase
